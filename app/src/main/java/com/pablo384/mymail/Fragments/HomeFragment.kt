@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         with(view){
             listViewHome.adapter = AdapterMail(context,listaMail)
             listViewHome.onItemClickListener = AdapterView.OnItemClickListener { adapterView: AdapterView<*>, view: View, position: Int, id: Long ->
-                Log.d("TAG","posicion $position")}
+                Log.d("TAG","posicion ${adapterView.getItemAtPosition(position).toString()}")}
         }
 
         // Inflate the layout for this fragment
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         if (context is OnFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListenerDetailFragment")
         }
     }
 
