@@ -9,11 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.SimpleCursorAdapter
 
 import com.pablo384.mymail.R
-import android.widget.ArrayAdapter
-import com.pablo384.mymail.Activities.MainActivity
 import com.pablo384.mymail.Adapter.AdapterMail
 import com.pablo384.mymail.Models.Mail
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -22,12 +19,12 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [HomeFragment.OnFragmentInteractionListener] interface
+ * [HomeFragment.OnFragmentInteractionListenerHomeFragment] interface
  * to handle interaction events.
  */
 class HomeFragment : Fragment() {
 
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mListenerHomeFragment: OnFragmentInteractionListenerHomeFragment? = null
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -43,7 +40,10 @@ class HomeFragment : Fragment() {
         with(view){
             listViewHome.adapter = AdapterMail(context,listaMail)
             listViewHome.onItemClickListener = AdapterView.OnItemClickListener { adapterView: AdapterView<*>, view: View, position: Int, id: Long ->
-                Log.d("TAG","posicion ${adapterView.getItemAtPosition(position).toString()}")}
+                Log.d("TAG","posicion ${adapterView.getItemAtPosition(position)}")
+                onItemPressed(adapterView.getItemAtPosition(position) as Mail)
+
+            }
         }
 
         // Inflate the layout for this fragment
@@ -51,21 +51,21 @@ class HomeFragment : Fragment() {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
+    fun onItemPressed(mail: Mail) {
+        if (mListenerHomeFragment != null) {
+            mListenerHomeFragment!!.onFragmentInteractionHomeFragmentData(mail)
         }
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         try{
-            mListener = context as OnFragmentInteractionListener
+            mListenerHomeFragment = context as OnFragmentInteractionListenerHomeFragment
         }catch (e:Exception){
             e.printStackTrace()
         }
-        if (context is OnFragmentInteractionListener) {
-            mListener = context
+        if (context is OnFragmentInteractionListenerHomeFragment) {
+            mListenerHomeFragment = context
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListenerDetailFragment")
         }
@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        mListener = null
+        mListenerHomeFragment = null
     }
 
     /**
@@ -85,8 +85,8 @@ class HomeFragment : Fragment() {
      *
      * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
-    interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListenerHomeFragment {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentInteractionHomeFragmentData(mail: Mail)
     }
 }// Required empty public constructor

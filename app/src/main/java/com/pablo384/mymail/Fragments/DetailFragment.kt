@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.pablo384.mymail.Models.Mail
 
 import com.pablo384.mymail.R
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 /**
  * A simple [Fragment] subclass.
@@ -23,8 +25,9 @@ class DetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val view = inflater!!.inflate(R.layout.fragment_detail, container, false)
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_detail, container, false)
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -46,6 +49,11 @@ class DetailFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         mListenerDetailFragment = null
+    }
+    fun renderText(mail: Mail){
+        textViewSubjectDetailFragment.text=mail.subject
+        textViewFromDetailFragment.text=mail.from
+        editTextBodyDetailFragment.text=mail.body
     }
 
     /**
