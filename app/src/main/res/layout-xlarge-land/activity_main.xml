@@ -17,7 +17,7 @@
         />
     <fragment
         android:id="@+id/fragmentDetaile"
-        android:name="com.pablo384.mymail.Fragments.HomeFragment"
+        android:name="com.pablo384.mymail.Fragments.DetailFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"

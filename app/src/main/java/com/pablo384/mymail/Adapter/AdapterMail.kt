@@ -41,7 +41,7 @@ class AdapterMail(context:Context, array: ArrayList<Mail>):BaseAdapter() {
             vh = view.tag as ListRowHolder
         }
 
-        vh.init.text = sList[position].from.substring(0..1)
+        vh.init.text = sList[position].from.substring(0..0)
         vh.title.text = sList[position].from
         vh.body.text = sList[position].body.substring(0..90)
         return view

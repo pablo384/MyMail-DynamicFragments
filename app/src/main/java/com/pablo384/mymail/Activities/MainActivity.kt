@@ -10,7 +10,8 @@ import com.pablo384.mymail.Fragments.HomeFragment
 import com.pablo384.mymail.Models.Mail
 import com.pablo384.mymail.R
 
-class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListenerHomeFragment {
+class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListenerHomeFragment, DetailFragment.OnFragmentInteractionListenerDetailFragment {
+
 
 
     private var ismultiPanel = false
@@ -21,8 +22,9 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
     }
 
     override fun onFragmentInteractionHomeFragmentData(mail: Mail) {
+        //setMultiPanel()
         if (ismultiPanel) {
-            val frDetail = supportFragmentManager.findFragmentById(R.id.fragmentDetail) as DetailFragment
+            val frDetail = supportFragmentManager.findFragmentById(R.id.fragmentDetaile) as DetailFragment
             frDetail.renderText(Mail(mail.subject, mail.from, mail.body))
 
         } else {
@@ -33,8 +35,11 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
                     ))
         }
     }
+    override fun onFragmentInteractionDetailFun(uri: Uri) {
+
+    }
 
     fun setMultiPanel() {
-        ismultiPanel = (supportFragmentManager.findFragmentById(R.id.fragmentDetail) != null)
+        ismultiPanel = (supportFragmentManager.findFragmentById(R.id.fragmentDetaile) != null)
     }
 }

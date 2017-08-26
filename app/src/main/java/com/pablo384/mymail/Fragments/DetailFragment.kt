@@ -39,6 +39,11 @@ class DetailFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        try{
+            mListenerDetailFragment = context as OnFragmentInteractionListenerDetailFragment
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
         if (context is OnFragmentInteractionListenerDetailFragment) {
             mListenerDetailFragment = context
         } else {
